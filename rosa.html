@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi amor</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f7e4e4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        #rose-container {
+            position: absolute;
+            font-size: 72px;
+        }
+
+        .petal {
+            position: absolute;
+            cursor: pointer;
+            transition: transform 0.5s ease-in-out;
+        }
+
+        .petal:hover {
+            transform: rotate(90deg);
+        }
+
+    #message-container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    }
+
+    #message {
+    display: none;
+    font-size: 40px;
+    text-align: unset;
+    color: #000000;
+    }
+    </style>
+</head>
+<body>
+    <div id="rose-container">
+        <div class="petal" style="top: 30%; left: 50%;" onclick="cutPetal(this)">🌹</div>
+        <div class="petal" style="top: 50%; left: 30%;" onclick="cutPetal(this)">🌹</div>
+        <div class="petal" style="top: 50%; left: 70%;" onclick="cutPetal(this)">🌹</div>
+        <div class="petal" style="top: 70%; left: 50%;" onclick="cutPetal(this)">🌹</div>
+
+        <div id="message-container"></div>
+            <div id="message"></div>
+        </div>
+    </div>
+
+    <script>
+        const messages = [
+            "Cortando la primer rosa...",
+            "Desvelando el segundo mensaje...",
+            "Otra rosa que cae, ¿qué dirá esta?",
+            "¡Última rosa! ¿Qué nos revelará?"
+        ];
+
+        let messageIndex = 0;
+
+        function cutPetal(petal) {
+            petal.style.transform = "rotate(90deg) translateY(100%)";
+            setTimeout(() => {
+                petal.style.display = "none";
+                showNextMessage();
+                checkAllPetalsCut();
+            }, 500);
+        }
+
+        function showNextMessage() {
+            const message = document.getElementById('message');
+            message.innerHTML = messages[messageIndex];
+            message.style.display = 'block';
+            messageIndex++;
+        }
+
+        function checkAllPetalsCut() {
+            const petals = document.querySelectorAll('.petal');
+            const allPetalsCut = Array.from(petals).every(petal => petal.style.display === 'none');
+            if (allPetalsCut) {
+                setTimeout(() => {
+                    revealFinalMessage();
+                }, 1000);
+            }
+        }
+
+        function revealFinalMessage() {
+            const message = document.getElementById('message');
+            message.innerHTML = "En este 14 de febrero, te pido perdón mi amor eterno. ¡Te amo mucho mi niña Beatriz!❤️";
+        }
+    </script>
+</body>
+</html>
